@@ -56,27 +56,22 @@ base_path = "/var/root/lua/"
 -- execute the scripts
 log("Executing user scripts in " .. bundle_id)
 
+function runscripts(script_files)
+    for index, file in pairs(script_files) do
+        log("Running script: " .. file)
+
+        assert(loadfile(file))()
+    end
+end
+
 -- run general scripts
 script_files = files_ls(base_path .. "pre_all*.lua")
-for index, file in pairs(script_files) do
-    log("Running script: " .. file)
-
-    dofile(file)
-end
+runscripts(script_files)
 
 -- run specific scripts
 script_files = files_ls(base_path .. bundle_id .. "*.lua")
-for index, file in pairs(script_files) do
-    log("Running script: " .. file)
-
-    dofile(file)
-end
+runscripts(script_files)
 
 -- run general scripts
 script_files = files_ls(base_path .. "post_all*.lua")
-for index, file in pairs(script_files) do
-    log("Running script: " .. file)
-
-    dofile(file)
-end
-
+runscripts(script_files)

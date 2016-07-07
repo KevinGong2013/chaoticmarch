@@ -28,15 +28,17 @@ function click_button(button)
     local x = button["x"] + math.floor((button["width"]/2))
     local y = button["y"] + math.floor((button["height"]/2))
 
-    showCircle(0, x, y, 20);
-
     touchNum = (touchNum + 1) % 9
 
     touchDown(touchNum, x, y)
-    usleep(83410.29)
+    showCircle(0, x, y, 20);
+
+    usleep(500)
     touchUp(touchNum, x, y)
 
     hideCircle(0);
+
+    usleep(5000) -- let the circle hide.
 end
 
 -- try to get out of alert
