@@ -11,7 +11,7 @@
 }
 
 + (void) execScript:(NSString*)script {
-	execLuaScript(script);
+	execLuaScript([script UTF8String]);
 }
 
 @end
